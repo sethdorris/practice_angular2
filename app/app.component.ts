@@ -1,30 +1,29 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, Input, OnInit } from '@angular/core';
+import { backlog } from './backlog.component';
 
 @Component({
     selector: 'my-app',
     template:`
             <h1>Software Development PM Board</h1>
-            <div>Backlog
-                <div (click)="func(backlog)" *ngIf=backlog.show>Ticket ID: {{backlog.id}} - Title: {{backlog.title}} - Details: {{backlog.details}}</div>
-                <div *ngIf=!backlog.show>
-                    Edit Title: <input [(ngModel)]="backlog.title" placeholder="backlog.title"> <br>
-                    Edit Details: <input [(ngModel)]="backlog.details" placeholder="backlog.details">
-                    <button (click)="func(backlog)">Save Changes</button>
-            </div>
-        `
+            <div>
+                <h3>Backlog</h3>
+                <backlog [tickets]="tickets" (ticketsChange)="TicketChanger($event);"></backlog>
+            </div>          
+        `,
+    directives: [backlog]
 })
-export class AppComponent {
+
+export class AppComponent implements OnInit {
     title = "Software Project Board";
-    backlog: Ticket = {
-        id: 1,
-        title: "Setup Mock JIRA Board",
-        status: "Backlog",
-        details: "I need to setup a mock JIRA Board",
-        show: true
-    };
-    func = function (backlog) {
-        backlog.show ? backlog.show = false : backlog.show = true
-    };
+    tickets: Ticket[];
+    ngOnInit() {
+        this.tickets = SeedTickets;
+        console.log("this tickets", this.tickets);
+    }
+    TicketChanger($event) {
+        console.log("event", $event);
+        console.log("Tickets array", this.tickets);
+    }
 }
 
 export class Ticket {
@@ -34,3 +33,11 @@ export class Ticket {
     details: string;
     show: boolean;
 }
+
+var SeedTickets: Ticket[] = [
+    { id: 0, title: "Setup JIRA Board", status: "BACKLOG", details: "Setup your Jira Board and get to work!", show: true },
+    { id: 1, title: "Make Issue Columns", status: "BACKLOG", details: "This is details for making issue columns", show: true },
+    { id: 2, title: "Backlog Issue 3", status: "BACKLOG", details: "This is details for BLI3", show: true },
+    { id: 3, title: "In QA1", status: "QA", details: "This issue is in QA!", show: true },
+    { id: 4, title: "In QA2", status: "QA", details: "This issue is in QA!", show: true }
+];

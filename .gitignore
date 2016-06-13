@@ -3,6 +3,14 @@ logs
 *.log
 npm-debug.log*
 
+#maps
+app/*.*.js
+app/*.*.js.map
+app/*.js
+app/*.js.map
+app/app.component.js
+app/app.component.js.map
+
 # Runtime data
 pids
 *.pid

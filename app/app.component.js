@@ -9,24 +9,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var backlog_component_1 = require('./backlog.component');
 var AppComponent = (function () {
     function AppComponent() {
         this.title = "Software Project Board";
-        this.backlog = {
-            id: 1,
-            title: "Setup Mock JIRA Board",
-            status: "Backlog",
-            details: "I need to setup a mock JIRA Board",
-            show: true
-        };
-        this.func = function (backlog) {
-            backlog.show ? backlog.show = false : backlog.show = true;
-        };
     }
+    AppComponent.prototype.ngOnInit = function () {
+        this.tickets = SeedTickets;
+        console.log("this tickets", this.tickets);
+    };
+    AppComponent.prototype.TicketChanger = function ($event) {
+        console.log("event", $event);
+        console.log("Tickets array", this.tickets);
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n            <h1>Software Development PM Board</h1>\n            <div>Backlog\n                <div (click)=\"func(backlog)\" *ngIf=backlog.show>Ticket ID: {{backlog.id}} - Title: {{backlog.title}} - Details: {{backlog.details}}</div>\n                <div *ngIf=!backlog.show>\n                    Edit Title: <input [(ngModel)]=\"backlog.title\" placeholder=\"backlog.title\"> <br>\n                    Edit Details: <input [(ngModel)]=\"backlog.details\" placeholder=\"backlog.details\">\n                    <button (click)=\"func(backlog)\">Save Changes</button>\n            </div>\n        "
+            template: "\n            <h1>Software Development PM Board</h1>\n            <div>\n                <h3>Backlog</h3>\n                <backlog [tickets]=\"tickets\" (ticketsChange)=\"TicketChanger($event);\"></backlog>\n            </div>          \n        ",
+            directives: [backlog_component_1.backlog]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
@@ -39,4 +39,11 @@ var Ticket = (function () {
     return Ticket;
 }());
 exports.Ticket = Ticket;
+var SeedTickets = [
+    { id: 0, title: "Setup JIRA Board", status: "BACKLOG", details: "Setup your Jira Board and get to work!", show: true },
+    { id: 1, title: "Make Issue Columns", status: "BACKLOG", details: "This is details for making issue columns", show: true },
+    { id: 2, title: "Backlog Issue 3", status: "BACKLOG", details: "This is details for BLI3", show: true },
+    { id: 3, title: "In QA1", status: "QA", details: "This issue is in QA!", show: true },
+    { id: 4, title: "In QA2", status: "QA", details: "This issue is in QA!", show: true }
+];
 //# sourceMappingURL=app.component.js.map
