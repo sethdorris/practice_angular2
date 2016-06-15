@@ -61,5 +61,6 @@ export class backlog {
         console.log("Ticket", ticket);
         ticket.show ? ticket.show = false : ticket.show = true
         this.ticketsChange.emit(ticket);
+        return true;
     };
 }
