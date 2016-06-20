@@ -1,16 +1,15 @@
 ﻿import { Component, Input, OnInit } from '@angular/core';
+import { ROUTER_DIRECTIVES } from "@angular/router";
 import { backlog } from './backlog.component';
 
 @Component({
     selector: 'my-app',
     template:`
-            <h1>Software Development PM Board</h1>
-            <div>
-                <h3>Backlog</h3>
-                <backlog [tickets]="tickets" (ticketsChange)="TicketChanger($event);"></backlog>
-            </div>          
+            <a [routerLink]="['/login']">Login</a>
+            <a [routerLink]="['/welcome']">Welcome</a>
+            <router-outlet></router-outlet>          
         `,
-    directives: [backlog]
+    directives: [backlog, ROUTER_DIRECTIVES]
 })
 
 export class AppComponent implements OnInit {

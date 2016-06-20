@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require("@angular/router");
 var backlog_component_1 = require('./backlog.component');
 var AppComponent = (function () {
     function AppComponent() {
@@ -25,8 +26,8 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n            <h1>Software Development PM Board</h1>\n            <div>\n                <h3>Backlog</h3>\n                <backlog [tickets]=\"tickets\" (ticketsChange)=\"TicketChanger($event);\"></backlog>\n            </div>          \n        ",
-            directives: [backlog_component_1.backlog]
+            template: "\n            <a [routerLink]=\"['/login']\">Login</a>\n            <a [routerLink]=\"['/welcome']\">Welcome</a>\n            <router-outlet></router-outlet>          \n        ",
+            directives: [backlog_component_1.backlog, router_1.ROUTER_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
