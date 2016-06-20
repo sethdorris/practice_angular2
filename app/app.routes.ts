@@ -6,7 +6,8 @@ import { AppComponent } from '../app/app.component';
 
 export const routes: RouterConfig = [
     { path: 'login', component: login },
-    { path: 'welcome', component: welcome }
+    { path: 'welcome', component: welcome },
+    { path: '', redirectTo: 'login', terminal: true }
 ];
 
 export const APP_ROUTER_PROVIDERS = [
